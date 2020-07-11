@@ -1,17 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+//React imports
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+//Redux imports
+
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./reducers";
+import reduxThunk from "redux-thunk";
+
+// //Auth imports
+// import { Auth0Provider } from "@auth0/auth0-react";
+
+//Main
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  /* preloadedState, */ composeEnhancers(applyMiddleware(reduxThunk))
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  // <Auth0Provider
+  //   domain="dev-8ycnwdvl.eu.auth0.com"
+  //   clientId="u7JDeEXqAtbgqGg80crDB3XIBTK6ECxS"
+  //   redirectUri={window.location.origin}
+  // >
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  // </Auth0Provider>,
+  document.querySelector("#root")
+);
