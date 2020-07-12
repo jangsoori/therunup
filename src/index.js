@@ -10,25 +10,36 @@ import { Provider } from "react-redux";
 import rootReducer from "./reducers";
 import reduxThunk from "redux-thunk";
 
-// //Auth imports
-// import { Auth0Provider } from "@auth0/auth0-react";
-
-//Main
-
+//Firebase
+import firebase from "firebase/app";
+import "firebase/firestore";
+import {
+  ReactReduxFirebaseProvider,
+  firebaseReducer,
+} from "react-redux-firebase";
+import { createFirestoreInstance, firestoreReducer } from "redux-firestore";
+import fbConfig from "./config/firebase";
+import { getFirebase } from "react-redux-firebase";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  /* preloadedState, */ composeEnhancers(applyMiddleware(reduxThunk))
+  /* preloadedState, */ composeEnhancers(
+    applyMiddleware(reduxThunk.withExtraArgument(getFirebase))
+  )
 );
+
+const rrfProps = {
+  firebase,
+  config: fbConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance,
+};
+
 ReactDOM.render(
-  // <Auth0Provider
-  //   domain="dev-8ycnwdvl.eu.auth0.com"
-  //   clientId="u7JDeEXqAtbgqGg80crDB3XIBTK6ECxS"
-  //   redirectUri={window.location.origin}
-  // >
   <Provider store={store}>
-    <App />
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <App />
+    </ReactReduxFirebaseProvider>
   </Provider>,
-  // </Auth0Provider>,
   document.querySelector("#root")
 );
