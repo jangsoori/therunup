@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { addRun } from "../actions";
 import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { useFirestoreConnect } from "react-redux-firebase";
 import { Router, Route } from "react-router-dom";
 
 import Dashboard from "./dashboard/Dashboard";
@@ -16,10 +16,24 @@ import "./App.scss";
 
 import LoginForm from "./auth/LoginForm";
 import SignUpForm from "./auth/SignUpForm";
+
+// const user = firebase.auth().currentUser;
+
 function App(props) {
   //Check if user is logged in (go to dashboard), if not, go to login page
   firebase.auth().onAuthStateChanged((user) => {
     user ? history.push("/") : history.push("/login");
+  });
+
+  useFirestoreConnect(() => {
+    if (props.user.uid) {
+      return [
+        {
+          collection: "runs",
+          where: [["userId", "==", props.user.uid]],
+        },
+      ];
+    }
   });
   return (
     <Router history={history}>
@@ -30,10 +44,16 @@ function App(props) {
           path="/"
           component={Dashboard}
         />
-        <div className="auth-screen-wrapper">
-          <Route path="/login" component={LoginForm} />
-          <Route path="/signup" component={SignUpForm} />
-        </div>
+        <Route path="/login">
+          <div className="auth-screen-wrapper">
+            <LoginForm />
+          </div>
+        </Route>
+        <Route path="/signup">
+          <div className="auth-screen-wrapper">
+            <SignUpForm />
+          </div>
+        </Route>
       </div>
     </Router>
   );
@@ -41,12 +61,8 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    runs: state.firestore.data,
     user: state.firebase.auth,
   };
 };
 
-export default compose(
-  connect(mapStateToProps, { addRun }),
-  firestoreConnect([{ collection: "runs" }])
-)(App);
+export default connect(mapStateToProps)(App);

@@ -1,13 +1,16 @@
 import firebase from "firebase/app";
 
 export const logIn = (email, password) => {
-  return () => {
-    console.log("hi");
-
+  return (dispatch) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .catch((err) => console.log(err));
+      .then((res) => {
+        dispatch({ type: "LOGIN_OK", payload: res });
+      })
+      .catch((err) => {
+        dispatch({ type: "LOGIN_FAIL", payload: err });
+      });
   };
 };
 
@@ -16,33 +19,87 @@ export const signUp = (newUser) => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
+
       .then((res) => {
         getFirebase().firestore().collection("users").doc(res.user.uid).set({
           firstName: newUser.firstName,
           lastName: newUser.lastName,
         });
+
+        res.user.updateProfile({
+          displayName: `${newUser.firstName} ${newUser.lastName}`,
+        });
+      })
+
+      .then((res) => {
+        dispatch({ type: "SIGNUP_OK", payload: res });
+      })
+      .catch((err) => {
+        dispatch({ type: "SIGNUP_FAIL", payload: err });
       });
   };
 };
 
 export const signOut = () => {
-  return () => {
+  return (dispatch) => {
     firebase
       .auth()
       .signOut()
-      .then(function () {
-        // Sign-out successful.
+      .then(function (res) {
+        dispatch({ type: "LOGOUT_OK", payload: res });
       })
-      .catch(function (error) {
-        // An error happened.
+      .catch(function (err) {
+        dispatch({ type: "LOGOUT_FAIL", payload: err });
+      });
+  };
+};
+
+//Get user info
+
+export const getUserInfo = (userId) => {
+  return (dispatch, getState, getFirebase) => {
+    getFirebase()
+      .firestore()
+      .collection("users")
+      .doc(userId)
+      .get()
+      .then((res) => {
+        dispatch({ type: "GET_USER_INFO", payload: res.data() });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+//Get user runs
+
+export const getUserRuns = () => {
+  return (dispatch, getState, getFirebase) => {
+    const user = firebase.auth().currentUser;
+    console.log(user.uid);
+
+    getFirebase()
+      .firestore()
+      .collection("runs")
+      .where("userId", "==", user.uid)
+      .get()
+      .then((res) => {
+        // dispatch({ type: "GET_USER_RUNS", payload: res.data() });
+        // console.log(res.data);
       });
   };
 };
 export const addRun = (run) => {
-  return async (dispatch, getState, getFirebase) => {
-    await getFirebase()
+  return (dispatch, getState, getFirebase) => {
+    const user = firebase.auth().currentUser;
+
+    getFirebase()
       .firestore()
       .collection("runs")
-      .add({ ...run });
+      .add({ ...run })
+      .then((res) => {
+        dispatch({ type: "ADD_RUN" });
+      });
   };
 };
