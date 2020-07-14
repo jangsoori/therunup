@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { signOut, logIn } from "../../actions";
+import React, { useState } from "react";
+import { signOut } from "../../actions";
 import { connect } from "react-redux";
-import { getUserInfo, getUserRuns, addRun } from "../../actions";
+import { getUserRuns, addRun } from "../../actions";
 import "./Dashboard.scss";
 import UserSummary from "./UserSummary";
+import Runs from "./Runs";
+import { useRef } from "react";
+import { Router, Route, Redirect, Switch, Link } from "react-router-dom";
+import AddRun from "./content/AddRun";
 function Dashboard(props) {
-  useEffect(() => {
-    props.getUserInfo(props.userId);
-
-    // console.log(user);
-  }, []); //Will only run once
-
   const [headerMenuVis, setHeaderMenuVis] = useState(false);
-  console.log(headerMenuVis);
+
+  const dashboardRef = useRef(null);
+
   return (
-    <div className="dashboard-wrapper" onClick={() => setHeaderMenuVis(false)}>
+    <div
+      ref={dashboardRef}
+      className="dashboard-wrapper"
+      onClick={() => setHeaderMenuVis(false)}
+    >
       {/* Hide menu on click anywhere but menu icon */}
       <div className="dashboard-header">
-        <h2 className="header-welcome">Hello, {props.user.firstName}</h2>
+        <h2 className="header-welcome">Hello, {props.auth.displayName}</h2>
         <i
           className="fas fa-bars dashboard-profile-menu-btn"
           onClick={(e) => {
@@ -60,8 +64,28 @@ function Dashboard(props) {
           ds
         </button> */}
       </div>
-      <div className="dashboard-profile-summary">
-        <UserSummary />
+      <Link to="/dashboard/new" style={{ color: "white" }}>
+        NEW
+      </Link>
+      <div className="dashboard-main-content">
+        <div className="dashboard-profile-summary">
+          <UserSummary />
+        </div>
+
+        <div className="dashboard-middle-content">
+          <Switch>
+            <Route exact path="/dashboard/">
+              <div className="dashboard-runs">
+                <Runs dbRef={dashboardRef} runs={props.runs} />
+              </div>
+            </Route>
+            <Route path="/dashboard/new">
+              <div className="dashboard-add-run">
+                <AddRun />
+              </div>
+            </Route>
+          </Switch>
+        </div>
       </div>
     </div>
   );
@@ -69,14 +93,15 @@ function Dashboard(props) {
 
 const mapStateToProps = (state) => {
   return {
-    runs: state.firestore.data,
+    runs: state.firestore.ordered.runs,
     user: state.user,
     userId: state.firebase.auth.uid,
+    auth: state.firebase.auth,
   };
 };
 export default connect(mapStateToProps, {
   signOut,
-  getUserInfo,
+
   getUserRuns,
   addRun,
 })(Dashboard);

@@ -1,0 +1,93 @@
+.run-item-wrapper {
+  width: 60%;
+  -webkit-box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
+}
+
+.run-item {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 3rem;
+  &-header {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.3rem;
+    }
+  }
+  //Dot menu on item
+  &-menu {
+    position: relative;
+
+    &-content.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &-content {
+      position: absolute;
+      left: -2rem;
+      background-color: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s;
+      > p {
+        width: 10rem;
+        padding: 1rem 2rem;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: rgba(41, 96, 168, 1);
+          color: white;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &-menu-icon {
+    font-size: 3rem;
+    display: flex;
+    cursor: pointer;
+
+    color: rgba(41, 96, 168, 1);
+    position: relative;
+    margin-right: 2rem;
+    margin-top: 0.5rem;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  &-img {
+    margin-bottom: 3rem;
+  }
+
+  &-detail {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-around;
+    padding-bottom: 2rem;
+    > p {
+      font-size: 1.6rem;
+      justify-self: center;
+      font-weight: bold;
+      > span {
+        font-weight: normal;
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
-
+import { Redirect } from "react-router-dom";
+import history from "../history";
 export const logIn = (email, password) => {
   return (dispatch) => {
     firebase
@@ -7,6 +8,7 @@ export const logIn = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
         dispatch({ type: "LOGIN_OK", payload: res });
+        history.push("/");
       })
       .catch((err) => {
         dispatch({ type: "LOGIN_FAIL", payload: err });
@@ -56,22 +58,6 @@ export const signOut = () => {
 
 //Get user info
 
-export const getUserInfo = (userId) => {
-  return (dispatch, getState, getFirebase) => {
-    getFirebase()
-      .firestore()
-      .collection("users")
-      .doc(userId)
-      .get()
-      .then((res) => {
-        dispatch({ type: "GET_USER_INFO", payload: res.data() });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
-
 //Get user runs
 
 export const getUserRuns = () => {
@@ -92,8 +78,6 @@ export const getUserRuns = () => {
 };
 export const addRun = (run) => {
   return (dispatch, getState, getFirebase) => {
-    const user = firebase.auth().currentUser;
-
     getFirebase()
       .firestore()
       .collection("runs")
@@ -101,5 +85,6 @@ export const addRun = (run) => {
       .then((res) => {
         dispatch({ type: "ADD_RUN" });
       });
+    history.push("/dashboard");
   };
 };

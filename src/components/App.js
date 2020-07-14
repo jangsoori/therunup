@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useS } from "react";
 import { connect } from "react-redux";
-import { addRun } from "../actions";
-import { compose } from "redux";
+
 import { useFirestoreConnect } from "react-redux-firebase";
-import { Router, Route } from "react-router-dom";
+import { Router, Route, Redirect } from "react-router-dom";
 
 import Dashboard from "./dashboard/Dashboard";
 import history from "../history";
 import firebase from "firebase/app";
-
-import ProtectedRoute from "./ProtectedRoute";
 
 import "../reset.css";
 import "./App.scss";
@@ -22,7 +19,7 @@ import SignUpForm from "./auth/SignUpForm";
 function App(props) {
   //Check if user is logged in (go to dashboard), if not, go to login page
   firebase.auth().onAuthStateChanged((user) => {
-    user ? history.push("/") : history.push("/login");
+    !user && history.push("/login");
   });
 
   useFirestoreConnect(() => {
@@ -37,23 +34,24 @@ function App(props) {
   });
   return (
     <Router history={history}>
-      <div className="app-container">
-        <ProtectedRoute
-          user={props.user.uid}
-          exact
-          path="/"
-          component={Dashboard}
-        />
-        <Route path="/login">
-          <div className="auth-screen-wrapper">
-            <LoginForm />
-          </div>
-        </Route>
-        <Route path="/signup">
-          <div className="auth-screen-wrapper">
-            <SignUpForm />
-          </div>
-        </Route>
+      <div className="container">
+        <div className="app-container">
+          <Route exact path="/">
+            <Redirect to="/dashboard/home" />
+          </Route>
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/login">
+            {props.user.uid && <Redirect to="/" />}
+            <div className="auth-screen-wrapper">
+              <LoginForm />
+            </div>
+          </Route>
+          <Route path="/signup">
+            <div className="auth-screen-wrapper">
+              <SignUpForm />
+            </div>
+          </Route>
+        </div>
       </div>
     </Router>
   );

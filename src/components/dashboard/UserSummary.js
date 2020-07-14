@@ -2,7 +2,6 @@ import React from "react";
 import "./UserSummary.scss";
 import { connect } from "react-redux";
 function UserSummary(props) {
-  console.log(props.runList);
   if (!props.runList) {
     return null;
   }
@@ -10,12 +9,12 @@ function UserSummary(props) {
   const totalRuns = props.runList.length;
   const totalDistance = (arr) => {
     return arr.reduce((a, b) => {
-      return a + b.distance;
+      return +a + +b.distance;
     }, 0);
   };
   const totalLength = (arr) => {
     return arr.reduce((a, b) => {
-      return a + b.length;
+      return +a + +b.length;
     }, 0);
   };
   return (
@@ -26,13 +25,13 @@ function UserSummary(props) {
         <div className="user-summary-runs">
           <div className="user-summary-runs-item">
             <p>Runs: </p>
-            <span>{totalRuns}</span>
+            <span>{+totalRuns}</span>
           </div>
           <div className="user-summary-runs-item">
-            <p>Distance: </p> <span>{totalDistance(props.runList)} km</span>
+            <p>Distance: </p> <span>{+totalDistance(props.runList)} km</span>
           </div>
           <div className="user-summary-runs-item">
-            <p>Length: </p> <span>{totalLength(props.runList)} min</span>
+            <p>Length: </p> <span>{+totalLength(props.runList)} min</span>
           </div>
           <div className="user-summary-runs-item">Running Log</div>
         </div>
