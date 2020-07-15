@@ -1,6 +1,8 @@
 import React from "react";
 import "./UserSummary.scss";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 function UserSummary(props) {
   if (!props.runList) {
     return null;
@@ -35,7 +37,10 @@ function UserSummary(props) {
           <div className="user-summary-runs-item">
             <p>Length: </p> <span>{+totalLength(props.runList)} min</span>
           </div>
-          <div className="user-summary-runs-item">Running Log</div>
+          <div className="user-summary-runs-item-btn">Running Log</div>
+          <Link to="/dashboard/new" className="user-summary-runs-item-btn">
+            New run
+          </Link>
         </div>
       </div>
     </div>

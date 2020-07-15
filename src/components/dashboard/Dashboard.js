@@ -71,9 +71,7 @@ function Dashboard(props) {
           ds
         </button> */}
       </div>
-      <Link to="/dashboard/new" style={{ color: "white" }}>
-        NEW
-      </Link>
+
       <div className="dashboard-main-content">
         <div className="dashboard-profile-summary">
           <UserSummary />

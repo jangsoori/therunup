@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import moment from "moment";
 import "./RunItem.scss";
 
 function RunItem(props) {
@@ -17,7 +17,7 @@ function RunItem(props) {
   }
 
   const { avgPace, description, length, distance, name, date } = props.run;
-
+  const avgPaceTime = moment.duration(avgPace, "minutes")._data;
   return (
     <div className="run-item-wrapper">
       <div className="run-item">
@@ -54,7 +54,10 @@ function RunItem(props) {
             Distance: <span>{distance} km</span>
           </p>
           <p>
-            Pace: <span>{avgPace} min/km</span>
+            Pace:{" "}
+            <span>
+              {avgPaceTime.minutes}:{avgPaceTime.seconds} min/km
+            </span>
           </p>
           <p>
             Time: <span>{length} min</span>
