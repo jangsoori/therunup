@@ -1,6 +1,4 @@
 import React from "react";
-import RunList from "./RunList";
-import { Form, Field } from "react-final-form";
 import RunForm from "./RunForm";
 import { addRun } from "../../../actions";
 import { connect } from "react-redux";
@@ -18,10 +16,12 @@ function AddRun(props) {
     });
   };
   return (
-    <div className="dashboard-subpage-content">
-      <h1>New Run</h1>
-      <div className="add-run-wrapper">
-        <RunForm onSubmit={onSubmit} />
+    <div className="dashboard-add-run">
+      <div className="dashboard-subpage-content">
+        <h1>New Run</h1>
+        <div className="add-run-wrapper">
+          <RunForm onSubmit={onSubmit} />
+        </div>
       </div>
     </div>
   );

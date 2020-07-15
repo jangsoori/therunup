@@ -17,6 +17,7 @@ import {
 import AddRun from "./content/AddRun";
 import EditRun from "./content/EditRun";
 import { useEffect } from "react";
+import DeleteRun from "./content/DeleteRun";
 
 function Dashboard(props) {
   useEffect(() => {
@@ -29,7 +30,6 @@ function Dashboard(props) {
       abortController.abort();
     };
   }, [props.userId]);
-  const [headerMenuVis, setHeaderMenuVis] = useState(false);
 
   const dashboardRef = useRef(null);
 
@@ -37,37 +37,24 @@ function Dashboard(props) {
     <div
       ref={dashboardRef}
       className="dashboard-wrapper"
-      onClick={() => setHeaderMenuVis(false)}
+      // onClick={() => setHeaderMenuVis(false)}
     >
       {/* Hide menu on click anywhere but menu icon */}
-      <div className="dashboard-header">
-        <h2 className="header-welcome">Hello, {props.user.firstName}</h2>
-        <i
-          className="fas fa-bars dashboard-profile-menu-btn"
-          onClick={(e) => {
-            //Stop event regarding setting state to false.
-            e.stopPropagation();
-            setHeaderMenuVis(!headerMenuVis);
+      <div className="dashboard-nav">
+        <Link to="/dashboard" className="dashboard-nav-item">
+          Dashboard
+        </Link>
+
+        <Link className="dashboard-nav-item">View runs</Link>
+        <Link className="dashboard-nav-item">Edit profile</Link>
+        <Link
+          onClick={() => {
+            props.signOut();
           }}
-        ></i>
-        <div
-          className={`dashboard-profile-menu ${headerMenuVis ? "visible" : ""}`}
+          className="dashboard-nav-item"
         >
-          <div className="dashboard-profile-menu-content">
-            <button className="dashboard-profile-menu-item">View runs</button>
-            <button className="dashboard-profile-menu-item">
-              Edit profile
-            </button>
-            <button
-              onClick={() => {
-                props.signOut();
-              }}
-              className="dashboard-profile-menu-item"
-            >
-              Sign out
-            </button>
-          </div>
-        </div>
+          Sign out
+        </Link>
       </div>
 
       <div className="dashboard-main-content">
@@ -81,12 +68,9 @@ function Dashboard(props) {
               <Runs dbRef={dashboardRef} runs={props.runs} />
             </div>
           </Route>
-          <Route path="/dashboard/new">
-            <div className="dashboard-add-run">
-              <AddRun />
-            </div>
-          </Route>
+          <Route exact path="/dashboard/new" component={AddRun}></Route>
           <Route exact path="/dashboard/edit/:id" component={EditRun} />
+          <Route exact path="/dashboard/delete/:id" component={DeleteRun} />
         </div>
       </div>
     </div>

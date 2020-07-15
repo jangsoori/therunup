@@ -121,3 +121,15 @@ export const editRun = (runId, values) => {
     history.push("/dashboard");
   };
 };
+export const deleteRun = (runId) => {
+  return (dispatch, getState, getFirebase) => {
+    getFirebase()
+      .firestore()
+      .collection("runs")
+      .doc(runId)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETE_RUN" });
+      });
+  };
+};

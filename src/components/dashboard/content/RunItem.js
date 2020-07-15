@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { deleteRun } from "../../../actions";
+import { connect } from "react-redux";
 import moment from "moment";
 import "./RunItem.scss";
 import { Link } from "react-router-dom";
@@ -53,7 +55,7 @@ function RunItem(props) {
                 }`}
               >
                 <Link to={`/dashboard/edit/${id}`}>Edit run</Link>
-                <Link to="/">Delete run</Link>
+                <Link to={`/dashboard/delete/${id}`}>Delete run</Link>
               </div>
             </div>
           </div>
@@ -84,4 +86,4 @@ function RunItem(props) {
   );
 }
 
-export default RunItem;
+export default connect(null, { deleteRun })(RunItem);
