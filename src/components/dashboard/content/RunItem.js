@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import moment from "moment";
 import "./RunItem.scss";
-
+import { Link } from "react-router-dom";
 const displayDuration = (duration) => {
   return moment.utc(duration * 1000).format("HH:mm:ss");
 };
@@ -27,6 +27,7 @@ function RunItem(props) {
     totalDurationSeconds,
     name,
     date,
+    id,
   } = props.run;
   const avgPaceTime = moment.duration(avgPace, "minutes")._data;
   return (
@@ -51,8 +52,8 @@ function RunItem(props) {
                   itemMenuVis ? "active" : ""
                 }`}
               >
-                <p>Edit run</p>
-                <p>Delete run</p>
+                <Link to={`/dashboard/edit/${id}`}>Edit run</Link>
+                <Link to="/">Delete run</Link>
               </div>
             </div>
           </div>

@@ -6,7 +6,7 @@ import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 
 export default combineReducers({
-  // runs: runsReducer,
+  runs: runsReducer,
   user: userReducer,
   auth: authReducer,
   firestore: firestoreReducer,

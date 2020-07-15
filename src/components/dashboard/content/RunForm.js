@@ -20,6 +20,7 @@ export default function RunForm(props) {
   const onSubmit = (formValues) => {
     const {
       durationSeconds,
+      durationH,
       durationMin,
       distanceKm,
       distanceM,
@@ -29,7 +30,13 @@ export default function RunForm(props) {
     props.onSubmit({
       name,
       description,
-      totalDurationSeconds: +durationSeconds + +durationMin * 60,
+      durationSeconds,
+      durationMin,
+      durationH,
+      distanceKm,
+      distanceM,
+      totalDurationSeconds:
+        +durationSeconds + +durationMin * 60 + +durationH * 3600,
 
       totalDistanceMeters: +distanceM + +distanceKm * 1000,
     });
@@ -38,6 +45,7 @@ export default function RunForm(props) {
   return (
     <div>
       <Form
+        initialValues={props.initialValues}
         onSubmit={onSubmit}
         render={({ handleSubmit }) => {
           return (

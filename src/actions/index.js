@@ -105,3 +105,19 @@ export const addRun = (run) => {
     history.push("/dashboard");
   };
 };
+
+export const editRun = (runId, values) => {
+  return (dispatch, getState, getFirebase) => {
+    getFirebase()
+      .firestore()
+      .collection("runs")
+      .doc(runId)
+      .update({
+        ...values,
+      })
+      .then(() => {
+        dispatch({ type: "EDIT_RUN" });
+      });
+    history.push("/dashboard");
+  };
+};

@@ -45,8 +45,9 @@
       opacity: 0;
       visibility: hidden;
       transition: all 0.5s;
-      > p {
-        width: 10rem;
+      > a {
+        display: block;
+        width: 12rem;
         padding: 1rem 2rem;
         transition: all 0.2s;
 

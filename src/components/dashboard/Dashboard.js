@@ -6,16 +6,29 @@ import "./Dashboard.scss";
 import UserSummary from "./UserSummary";
 import Runs from "./Runs";
 import { useRef } from "react";
-import { Router, Route, Redirect, Switch, Link } from "react-router-dom";
+import {
+  Router,
+  Route,
+  Redirect,
+  Switch,
+  Link,
+  useParams,
+} from "react-router-dom";
 import AddRun from "./content/AddRun";
+import EditRun from "./content/EditRun";
 import { useEffect } from "react";
+
 function Dashboard(props) {
   useEffect(() => {
+    const abortController = new AbortController();
     if (props.userId) {
       props.getUserName(props.userId);
     }
-  }, [props.userId]);
 
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [props.userId]);
   const [headerMenuVis, setHeaderMenuVis] = useState(false);
 
   const dashboardRef = useRef(null);
@@ -55,21 +68,6 @@ function Dashboard(props) {
             </button>
           </div>
         </div>
-
-        {/* <button
-          onClick={() =>
-            props.addRun({
-              name: "Evening run",
-              description: "Not too bad",
-              distance: 5,
-              length: 30,
-              avgPace: "6:00",
-              userId: props.userId,
-            })
-          }
-        >
-          ds
-        </button> */}
       </div>
 
       <div className="dashboard-main-content">
@@ -78,18 +76,17 @@ function Dashboard(props) {
         </div>
 
         <div className="dashboard-middle-content">
-          <Switch>
-            <Route exact path="/dashboard/">
-              <div className="dashboard-runs">
-                <Runs dbRef={dashboardRef} runs={props.runs} />
-              </div>
-            </Route>
-            <Route path="/dashboard/new">
-              <div className="dashboard-add-run">
-                <AddRun />
-              </div>
-            </Route>
-          </Switch>
+          <Route exact path="/dashboard/">
+            <div className="dashboard-runs">
+              <Runs dbRef={dashboardRef} runs={props.runs} />
+            </div>
+          </Route>
+          <Route path="/dashboard/new">
+            <div className="dashboard-add-run">
+              <AddRun />
+            </div>
+          </Route>
+          <Route exact path="/dashboard/edit/:id" component={EditRun} />
         </div>
       </div>
     </div>
