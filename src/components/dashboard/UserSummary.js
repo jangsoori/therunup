@@ -21,7 +21,9 @@ function UserSummary(props) {
     <div className="user-summary-wrapper">
       <div className="user-summary-content">
         <img src="https://i.pravatar.cc/150" alt="avatar" />
-        <p>Gracjan Kołodziej</p>
+        <p>
+          {props.user.firstName} {props.user.lastName}
+        </p>
         <div className="user-summary-runs">
           <div className="user-summary-runs-item">
             <p>Runs: </p>
@@ -43,6 +45,8 @@ function UserSummary(props) {
 const mapStateToProps = (state) => {
   return {
     runList: state.firestore.ordered.runs,
+    auth: state.firebase.auth,
+    user: state.user,
   };
 };
 

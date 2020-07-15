@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import { Redirect } from "react-router-dom";
 import history from "../history";
+import { getFirebase } from "react-redux-firebase";
 export const logIn = (email, password) => {
   return (dispatch) => {
     firebase
@@ -35,8 +36,11 @@ export const signUp = (newUser) => {
 
       .then((res) => {
         dispatch({ type: "SIGNUP_OK", payload: res });
+      })
+      .then(() => {
         history.push("/dashboard");
       })
+
       .catch((err) => {
         dispatch({ type: "SIGNUP_FAIL", payload: err });
       });
@@ -59,6 +63,18 @@ export const signOut = () => {
 
 //Get user info
 
+export const getUserName = (id) => {
+  return (dispatch, getState, getFirebase) => {
+    getFirebase()
+      .firestore()
+      .collection("users")
+      .doc(id)
+      .get()
+      .then((res) => {
+        dispatch({ type: "GET_USER_NAME", payload: res.data() });
+      });
+  };
+};
 //Get user runs
 
 export const getUserRuns = () => {

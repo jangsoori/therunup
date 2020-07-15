@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import { signOut } from "../../actions";
 import { connect } from "react-redux";
-import { getUserRuns, addRun } from "../../actions";
+import { getUserRuns, addRun, getUserName } from "../../actions";
 import "./Dashboard.scss";
 import UserSummary from "./UserSummary";
 import Runs from "./Runs";
 import { useRef } from "react";
 import { Router, Route, Redirect, Switch, Link } from "react-router-dom";
 import AddRun from "./content/AddRun";
+import { useEffect } from "react";
 function Dashboard(props) {
+  useEffect(() => {
+    if (props.userId) {
+      props.getUserName(props.userId);
+    }
+  }, [props.userId]);
+
   const [headerMenuVis, setHeaderMenuVis] = useState(false);
 
   const dashboardRef = useRef(null);
@@ -21,7 +28,7 @@ function Dashboard(props) {
     >
       {/* Hide menu on click anywhere but menu icon */}
       <div className="dashboard-header">
-        <h2 className="header-welcome">Hello, {props.auth.displayName}</h2>
+        <h2 className="header-welcome">Hello, {props.user.firstName}</h2>
         <i
           className="fas fa-bars dashboard-profile-menu-btn"
           onClick={(e) => {
@@ -101,7 +108,7 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {
   signOut,
-
+  getUserName,
   getUserRuns,
   addRun,
 })(Dashboard);
