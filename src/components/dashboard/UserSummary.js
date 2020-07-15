@@ -10,14 +10,16 @@ function UserSummary(props) {
 
   const totalRuns = props.runList.length;
   const totalDistance = (arr) => {
-    return arr.reduce((a, b) => {
-      return +a + +b.distance;
+    const total = arr.reduce((a, b) => {
+      return +a + +b.totalDistanceMeters;
     }, 0);
+    return total / 1000;
   };
   const totalLength = (arr) => {
-    return arr.reduce((a, b) => {
-      return +a + +b.length;
+    const total = arr.reduce((a, b) => {
+      return +a + +b.totalDurationSeconds;
     }, 0);
+    return total / 60;
   };
   return (
     <div className="user-summary-wrapper">
@@ -32,7 +34,8 @@ function UserSummary(props) {
             <span>{+totalRuns}</span>
           </div>
           <div className="user-summary-runs-item">
-            <p>Distance: </p> <span>{+totalDistance(props.runList)} km</span>
+            <p>Distance: </p>{" "}
+            <span>{(+totalDistance(props.runList)).toFixed(2)} km</span>
           </div>
           <div className="user-summary-runs-item">
             <p>Length: </p> <span>{+totalLength(props.runList)} min</span>

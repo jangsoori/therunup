@@ -7,11 +7,14 @@ import { connect } from "react-redux";
 import moment from "moment";
 function AddRun(props) {
   const onSubmit = (values) => {
+    console.log(values);
+
     props.addRun({
       ...values,
-      avgPace: values.length / values.distance,
+      avgPace:
+        values.totalDurationSeconds / 60 / (values.totalDistanceMeters / 1000),
       userId: props.userId,
-      date: moment().format("MMMM Do YYYY"),
+      date: moment().format("MMMM Do YYYY, HH:mm"),
     });
   };
   return (

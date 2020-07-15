@@ -16,7 +16,14 @@ function RunItem(props) {
     };
   }
 
-  const { avgPace, description, length, distance, name, date } = props.run;
+  const {
+    avgPace,
+    description,
+    totalDistanceMeters,
+    totalDurationSeconds,
+    name,
+    date,
+  } = props.run;
   const avgPaceTime = moment.duration(avgPace, "minutes")._data;
   return (
     <div className="run-item-wrapper">
@@ -51,16 +58,20 @@ function RunItem(props) {
         </div>
         <div className="run-item-detail">
           <p>
-            Distance: <span>{distance} km</span>
+            Distance: <span>{(totalDistanceMeters / 1000).toFixed(2)} km</span>
           </p>
           <p>
             Pace:{" "}
             <span>
-              {avgPaceTime.minutes}:{avgPaceTime.seconds} min/km
+              {avgPaceTime.minutes}:
+              {avgPaceTime.seconds < 10
+                ? `0${avgPaceTime.seconds}`
+                : avgPaceTime.seconds}{" "}
+              min/km
             </span>
           </p>
           <p>
-            Time: <span>{length} min</span>
+            Time: <span>{totalDurationSeconds / 60} min</span>
           </p>
         </div>
       </div>

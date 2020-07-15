@@ -1,6 +1,51 @@
 .run-form {
-  width: 60%;
+  width: 50rem;
   background-color: white;
   padding: 2rem;
   border-radius: 0.5rem;
+}
+
+.distance-fields-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // gap: 5rem;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.field-wrapper {
+  display: grid;
+  grid-template-rows: 1fr 0.5fr;
+  align-items: center;
+  justify-content: center;
+  &.single {
+    display: block;
+  }
+  span {
+    color: red;
+    text-align: left;
+    font-size: 1rem;
+  }
+  .field-input {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.duration-fields-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
