@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { deleteRun } from "../../../actions";
+import history from "../../../history";
+import { Button, Header, Image, Modal, Icon } from "semantic-ui-react";
+// import Modal from "../../Modal";
 
-function DeleteRun() {
-  return <div>ds</div>;
+function DeleteRun(props) {
+  console.log(props);
+
+  const [open, setOpen] = useState(true);
+
+  const handleClose = () => {
+    setOpen(false);
+    history.push("/");
+  };
+
+  return (
+    <Modal open={open} onClose={() => handleClose()}>
+      <Header icon="archive" content="Delete run" />
+      <Modal.Content>
+        <p>Are you sure you want to delete this run?</p>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button
+          color="red"
+          onClick={() => props.deleteRun(props.match.params.id)}
+        >
+          Yes
+        </Button>
+        <Button color="green" onClick={() => history.push("/")}>
+          No
+        </Button>
+      </Modal.Actions>
+    </Modal>
+  );
 }
 
 export default connect(null, { deleteRun })(DeleteRun);

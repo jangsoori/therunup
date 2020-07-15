@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef, createRef } from "react";
 import { deleteRun } from "../../../actions";
 import { connect } from "react-redux";
 import moment from "moment";
 import "./RunItem.scss";
 import { Link } from "react-router-dom";
+import DeleteRun from "./DeleteRun";
 const displayDuration = (duration) => {
   return moment.utc(duration * 1000).format("HH:mm:ss");
 };
 
 function RunItem(props) {
   const [itemMenuVis, setItemMenuVis] = useState(false);
+  const deleteRef = useRef(null);
 
   //Close menu on click outside of menu
   if (props.dbRef.current) {
@@ -55,7 +57,14 @@ function RunItem(props) {
                 }`}
               >
                 <Link to={`/dashboard/edit/${id}`}>Edit run</Link>
-                <Link to={`/dashboard/delete/${id}`}>Delete run</Link>
+                <Link
+                  to={{
+                    pathname: `/dashboard/delete/${id}`,
+                  }}
+                  ref={deleteRef}
+                >
+                  Delete run
+                </Link>
               </div>
             </div>
           </div>

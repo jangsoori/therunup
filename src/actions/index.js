@@ -131,5 +131,6 @@ export const deleteRun = (runId) => {
       .then(() => {
         dispatch({ type: "DELETE_RUN" });
       });
+    history.push("/");
   };
 };
