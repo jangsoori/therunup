@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import moment from "moment";
 import "./RunItem.scss";
 
+const displayDuration = (duration) => {
+  return moment.utc(duration * 1000).format("HH:mm:ss");
+};
+
 function RunItem(props) {
   const [itemMenuVis, setItemMenuVis] = useState(false);
 
@@ -71,7 +75,7 @@ function RunItem(props) {
             </span>
           </p>
           <p>
-            Time: <span>{totalDurationSeconds / 60} min</span>
+            Time: <span>{displayDuration(totalDurationSeconds)}</span>
           </p>
         </div>
       </div>

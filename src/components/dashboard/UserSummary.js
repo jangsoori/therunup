@@ -2,6 +2,10 @@ import React from "react";
 import "./UserSummary.scss";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import moment from "moment";
+const displayTotalDuration = (duration) => {
+  return moment.utc(duration * 1000).format("HH:mm:ss");
+};
 
 function UserSummary(props) {
   if (!props.runList) {
@@ -15,11 +19,11 @@ function UserSummary(props) {
     }, 0);
     return total / 1000;
   };
-  const totalLength = (arr) => {
+  const totalDuration = (arr) => {
     const total = arr.reduce((a, b) => {
       return +a + +b.totalDurationSeconds;
     }, 0);
-    return total / 60;
+    return displayTotalDuration(total);
   };
   return (
     <div className="user-summary-wrapper">
@@ -38,7 +42,7 @@ function UserSummary(props) {
             <span>{(+totalDistance(props.runList)).toFixed(2)} km</span>
           </div>
           <div className="user-summary-runs-item">
-            <p>Length: </p> <span>{+totalLength(props.runList)} min</span>
+            <p>Duration: </p> <span>{totalDuration(props.runList)}</span>
           </div>
           <div className="user-summary-runs-item-btn">Running Log</div>
           <Link to="/dashboard/new" className="user-summary-runs-item-btn">
