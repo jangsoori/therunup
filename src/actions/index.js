@@ -35,6 +35,7 @@ export const signUp = (newUser) => {
 
       .then((res) => {
         dispatch({ type: "SIGNUP_OK", payload: res });
+        history.push("/dashboard");
       })
       .catch((err) => {
         dispatch({ type: "SIGNUP_FAIL", payload: err });

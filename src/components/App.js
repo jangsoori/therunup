@@ -37,7 +37,7 @@ function App(props) {
       <div className="container">
         <div className="app-container">
           <Route exact path="/">
-            <Redirect to="/dashboard/home" />
+            <Redirect to="/dashboard" />
           </Route>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/login">
