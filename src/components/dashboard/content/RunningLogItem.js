@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import moment from "moment";
 import "./RunningLogItem.scss";
 import { deleteRun, editRun } from "../../../actions/runActions";
@@ -46,11 +46,11 @@ function RunningLogItem(props) {
           <Link
             to={{ pathname: `/dashboard/delete/${id}` }}
             ref={deleteRef}
-            className="ui button red"
+            className="ui button big red"
           >
             Delete
           </Link>
-          <Link to={`/dashboard/edit/${id}`} className="ui button primary">
+          <Link to={`/dashboard/edit/${id}`} className="ui button big primary">
             Edit
           </Link>
         </div>
