@@ -94,7 +94,7 @@ function Dashboard(props) {
             New run
           </Link>
           <Link
-            to="/dashboard"
+            to="/dashboard/runninglog"
             className="dashboard-side-nav-item ui massive button"
           >
             Running log

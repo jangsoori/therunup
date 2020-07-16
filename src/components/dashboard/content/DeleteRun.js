@@ -11,7 +11,7 @@ function DeleteRun(props) {
 
   const handleClose = () => {
     setOpen(false);
-    history.push("/");
+    history.goBack();
   };
 
   return (
@@ -47,7 +47,7 @@ function DeleteRun(props) {
         </div>
         <div
           className="ui button massive green"
-          onClick={() => history.push("/")}
+          onClick={() => history.goBack()}
         >
           No
         </div>

@@ -9,6 +9,7 @@ import EditRun from "./content/EditRun";
 import DeleteRun from "./content/DeleteRun";
 //Styles
 import "./DashboardContent.scss";
+import RunningLog from "./content/RunningLog";
 export default function DashboardContent(props) {
   return (
     <React.Fragment>
@@ -19,6 +20,7 @@ export default function DashboardContent(props) {
         render={() => <Runs dbRef={props.dashboardRef} runs={props.runs} />}
       />
       <Route exact path="/dashboard/new" component={AddRun}></Route>
+      <Route exact path="/dashboard/runninglog" component={RunningLog}></Route>
       <Route exact path="/dashboard/edit/:id" component={EditRun} />
       <Route exact path="/dashboard/delete/:id" component={DeleteRun} />
     </React.Fragment>

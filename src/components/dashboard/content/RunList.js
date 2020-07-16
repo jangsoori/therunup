@@ -1,6 +1,7 @@
 import React from "react";
 import RunItem from "./RunItem";
 import moment from "moment";
+import history from "../../../history";
 import "./RunList.scss";
 function RunList(props) {
   //create copy of arr to prevent error
