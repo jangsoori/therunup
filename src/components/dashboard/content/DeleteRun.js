@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { deleteRun } from "../../../actions";
+import { deleteRun } from "../../../actions/runActions";
 import history from "../../../history";
-import { Button, Header, Image, Modal, Icon } from "semantic-ui-react";
-// import Modal from "../../Modal";
+import { Modal } from "semantic-ui-react";
 
 function DeleteRun(props) {
   console.log(props);
@@ -17,7 +16,7 @@ function DeleteRun(props) {
 
   return (
     <Modal open={open} onClose={() => handleClose()}>
-      <Header icon="archive" content="Delete run" />
+      {/* <Header icon="archive" content="Delete run" />
       <Modal.Content>
         <p>Are you sure you want to delete this run?</p>
       </Modal.Content>
@@ -31,7 +30,28 @@ function DeleteRun(props) {
         <Button color="green" onClick={() => history.push("/")}>
           No
         </Button>
-      </Modal.Actions>
+      </Modal.Actions> */}
+
+      <div className="header">
+        <h1>Delete run</h1>
+      </div>
+      <div className="content">
+        <h2>Are you sure you want to delete this run?</h2>
+      </div>
+      <div className="actions">
+        <div
+          className="ui button massive red"
+          onClick={() => props.deleteRun(props.match.params.id)}
+        >
+          Yes
+        </div>
+        <div
+          className="ui button massive green"
+          onClick={() => history.push("/")}
+        >
+          No
+        </div>
+      </div>
     </Modal>
   );
 }

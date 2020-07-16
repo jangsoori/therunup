@@ -1,10 +1,9 @@
 import React, { useState, useRef, createRef } from "react";
-import { deleteRun } from "../../../actions";
+import { deleteRun } from "../../../actions/runActions";
 import { connect } from "react-redux";
 import moment from "moment";
 import "./RunItem.scss";
 import { Link } from "react-router-dom";
-import DeleteRun from "./DeleteRun";
 const displayDuration = (duration) => {
   return moment.utc(duration * 1000).format("HH:mm:ss");
 };
@@ -40,7 +39,8 @@ function RunItem(props) {
         <div className="run-item-header">
           <div className="run-item-header-left">
             <h3>{name}</h3>
-            <p>{date}</p>
+            <p>{description}</p>
+            <span>{date}</span>
           </div>
           <div className="run-item-header-right">
             <div className={`run-item-menu`}>
@@ -49,7 +49,7 @@ function RunItem(props) {
                   // e.stopPropagation();
                   setItemMenuVis(!itemMenuVis);
                 }}
-                class="fas fa-ellipsis-h run-item-menu-icon"
+                className="fas fa-ellipsis-h run-item-menu-icon"
               ></i>
               <div
                 className={`run-item-menu-content  ${

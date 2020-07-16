@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./LoginForm.scss";
-import { logIn } from "../../actions";
+import { logIn } from "../../actions/authActions";
 import { Form, Field } from "react-final-form";
 
 const required = (value) => (value ? undefined : "Required");

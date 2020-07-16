@@ -1,10 +1,9 @@
-import React, { useEffect, useS } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { useFirestoreConnect } from "react-redux-firebase";
 import { Router, Route, Redirect } from "react-router-dom";
 
-import Dashboard from "./dashboard/Dashboard";
 import history from "../history";
 import firebase from "firebase/app";
 
@@ -13,6 +12,7 @@ import "./App.scss";
 
 import LoginForm from "./auth/LoginForm";
 import SignUpForm from "./auth/SignUpForm";
+import Dashboard from "./dashboard/Dashboard";
 
 // const user = firebase.auth().currentUser;
 
@@ -34,24 +34,22 @@ function App(props) {
   });
   return (
     <Router history={history}>
-      <div className="container">
-        <div className="app-container">
-          <Route exact path="/">
-            <Redirect to="/dashboard" />
-          </Route>
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/login">
-            {props.user.uid && <Redirect to="/" />}
-            <div className="auth-screen-wrapper">
-              <LoginForm />
-            </div>
-          </Route>
-          <Route path="/signup">
-            <div className="auth-screen-wrapper">
-              <SignUpForm />
-            </div>
-          </Route>
-        </div>
+      <div className="app-container">
+        <Route exact path="/">
+          <Redirect to="/dashboard" />
+        </Route>
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/login">
+          {props.user.uid && <Redirect to="/" />}
+          <div className="auth-screen-wrapper">
+            <LoginForm />
+          </div>
+        </Route>
+        <Route path="/signup">
+          <div className="auth-screen-wrapper">
+            <SignUpForm />
+          </div>
+        </Route>
       </div>
     </Router>
   );

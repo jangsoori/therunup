@@ -1,3 +1,4 @@
+@import "../../assets/styles/shadows.scss";
 .auth-form-wrapper {
   margin: 0 auto;
   background-color: white;
@@ -5,6 +6,7 @@
   border-radius: 10px;
   width: 50rem;
   margin: 0 5rem;
+  box-shadow: $shadow-light;
   h2 {
     text-align: center;
     margin-bottom: 4rem;

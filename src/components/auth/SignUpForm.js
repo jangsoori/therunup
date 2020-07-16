@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./LoginForm.scss";
-import { signUp } from "../../actions";
+import { signUp } from "../../actions/authActions";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 

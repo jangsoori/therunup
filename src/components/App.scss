@@ -1,22 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-.app-container {
-  max-width: 140rem;
-  margin: 0 auto;
-  min-height: 100vh;
-}
-
-.container {
-  // height: 100vh;
-  width: 100%;
-  font-family: "Roboto";
-  background: linear-gradient(
-    180deg,
-    rgba(3, 26, 74, 0.8757702910265669) 0%,
-    rgba(41, 96, 168, 1) 100%
-  );
-}
-
 .auth-screen-wrapper {
   display: flex;
   justify-content: center;

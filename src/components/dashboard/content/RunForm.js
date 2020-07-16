@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
 import "./RunForm.scss";
-import { duration } from "moment";
 
 //FORM VALIDATION
 

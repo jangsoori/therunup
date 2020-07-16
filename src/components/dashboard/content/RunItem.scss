@@ -1,27 +1,36 @@
+@import "../../../assets/styles/shadows.scss";
+
 .run-item-wrapper {
-  width: 60%;
-  -webkit-box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
+  width: 60rem;
+  box-shadow: $shadow-light;
+
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  margin-bottom: 3rem;
 }
 
 .run-item {
   background-color: white;
   padding: 1rem;
-  border-radius: 0.5rem;
-  margin-bottom: 3rem;
   &-header {
-    margin-bottom: 3rem;
+    // margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
-
-    h3 {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    p {
-      font-size: 1.3rem;
+    &-left {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        font-size: 1.6rem;
+      }
+      span {
+        font-weight: bold;
+      }
     }
   }
   //Dot menu on item
@@ -35,7 +44,7 @@
 
     &-content {
       position: absolute;
-      left: -2rem;
+      left: -9rem;
       background-color: white;
       border-radius: 0.5rem;
       overflow: hidden;

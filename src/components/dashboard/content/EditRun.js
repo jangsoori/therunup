@@ -1,6 +1,6 @@
 import React from "react";
 import RunForm from "./RunForm";
-import { editRun } from "../../../actions";
+import { editRun } from "../../../actions/runActions";
 import { connect } from "react-redux";
 function EditRun(props) {
   const { run } = props;
@@ -22,22 +22,20 @@ function EditRun(props) {
   };
 
   return (
-    <div className="dashboard-edit-run">
-      <div className="dashboard-subpage-content">
-        <h1>Edit run</h1>
-        <RunForm
-          initialValues={{
-            name: name,
-            description: description,
-            durationSeconds: durationSeconds,
-            durationMin: durationMin,
-            durationH: durationH,
-            distanceKm: distanceKm,
-            distanceM: distanceM,
-          }}
-          onSubmit={onSubmit}
-        />
-      </div>
+    <div className="dashboard-content-edit-run">
+      <h1 className="dashboard-content-title">Edit run</h1>
+      <RunForm
+        initialValues={{
+          name: name,
+          description: description,
+          durationSeconds: durationSeconds,
+          durationMin: durationMin,
+          durationH: durationH,
+          distanceKm: distanceKm,
+          distanceM: distanceM,
+        }}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 }

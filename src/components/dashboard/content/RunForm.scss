@@ -1,11 +1,12 @@
+@import "../../../assets/styles/shadows.scss";
+
 .run-form {
   width: 50rem;
   background-color: white;
   padding: 2rem;
   border-radius: 0.5rem;
-  -webkit-box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 33px 5px rgba(0, 0, 0, 0.75);
+
+  box-shadow: $shadow-light;
 }
 
 .distance-fields-wrapper {
