@@ -26,6 +26,7 @@ export const signUp = (newUser) => {
         getFirebase().firestore().collection("users").doc(res.user.uid).set({
           firstName: newUser.firstName,
           lastName: newUser.lastName,
+          email: newUser.email,
         });
 
         res.user.updateProfile({

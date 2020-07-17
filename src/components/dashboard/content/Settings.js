@@ -23,35 +23,54 @@ function Settings(props) {
       props.changeEmail(email);
     };
     return (
-      <div className="userInfoForms">
+      <div className="userInfoForms" style={{ display: "grid", gap: "2rem" }}>
         <Form
           onSubmit={onSubmitName}
           render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <Field
-                initialValue={props.user.firstName}
-                name="firstName"
-                component="input"
-                placeholder="First name"
-              />
+            <form className="ui massive form" onSubmit={handleSubmit}>
+              <div className="field">
+                <label htmlFor="">First name</label>
+                <Field
+                  initialValue={props.user.firstName}
+                  name="firstName"
+                  component="input"
+                  placeholder="First name"
+                />
+              </div>
+              <div className="field">
+                <label htmlFor="">Last name</label>
+                <Field
+                  initialValue={props.user.lastName}
+                  name="lastName"
+                  component="input"
+                  placeholder="Last name"
+                />
+              </div>
 
-              <Field
-                initialValue={props.user.lastName}
-                name="lastName"
-                component="input"
-                placeholder="Last name"
-              />
-
-              <button type="submit">Submit</button>
+              <button className="ui button massive" type="submit">
+                Change name
+              </button>
             </form>
           )}
         />
+
         <Form
           onSubmit={onSubmitEmail}
           render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <Field name="email" component="input" placeholder="New Email" />
-              <button type="submit">Submit</button>
+            <form className="ui massive form" onSubmit={handleSubmit}>
+              <div className="field">
+                <label htmlFor="">Email</label>
+                <Field
+                  initialValue={props.user.email}
+                  name="email"
+                  component="input"
+                  placeholder="Email"
+                />
+              </div>
+
+              <button className="ui button massive" type="submit">
+                Change email
+              </button>
             </form>
           )}
         />
@@ -60,16 +79,19 @@ function Settings(props) {
   };
   const renderPasswordSettings = () => {
     const onSubmit = (formValues) => {
-      const { oldPassword, newPassword } = formValues;
+      const { oldPassword, newPassword, newPasswordRepeat } = formValues;
 
-      props.changePassword(oldPassword, newPassword);
+      if (newPassword === newPasswordRepeat) {
+        props.changePassword(oldPassword, newPassword);
+      }
     };
     return (
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <div>
+          <form className="ui form massive" onSubmit={handleSubmit}>
+            <div className="field">
+              <label htmlFor="">Old password</label>
               <Field
                 name="oldPassword"
                 component="input"
@@ -77,7 +99,8 @@ function Settings(props) {
                 placeholder="Old password"
               />
             </div>
-            <div>
+            <div className="field">
+              <label htmlFor="">New password</label>
               <Field
                 name="newPassword"
                 component="input"
@@ -85,7 +108,18 @@ function Settings(props) {
                 placeholder="New password"
               />
             </div>
-            <button type="submit">Submit</button>
+            <div className="field">
+              <label htmlFor="">Repeat new password</label>
+              <Field
+                name="newPasswordRepeat"
+                component="input"
+                type="password"
+                placeholder="New password"
+              />
+            </div>
+            <button className="ui button massive" type="submit">
+              Submit
+            </button>
           </form>
         )}
       />
