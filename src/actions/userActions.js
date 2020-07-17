@@ -9,10 +9,16 @@ export const getUserName = (id) => {
       .doc(id)
       .get()
       .then((res) => {
-        dispatch({ type: "GET_USER_NAME", payload: res.data() });
+        console.log(res.data());
+
+        dispatch({ type: "GET_USER_NAME_OK", payload: res.data() });
+      })
+      .catch((err) => {
+        dispatch({ type: "GET_USER_NAME_FAIL", err });
       });
   };
 };
+
 //Get user runs
 
 export const getUserRuns = () => {

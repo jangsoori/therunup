@@ -1,5 +1,5 @@
 //React imports
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 //React Router import
 import { Link } from "react-router-dom";
@@ -14,12 +14,15 @@ import { signOut } from "../../actions/authActions";
 import DashboardContent from "./DashboardContent";
 //Style imports
 import "./Dashboard.scss";
+
 //Utilities
 import moment from "moment";
 //Main Component
 function Dashboard(props) {
   //Dashboard ref for run item menu
   const dashboardRef = useRef(null);
+  //Dropdown state
+
   //Fetch user name on page load
   useEffect(() => {
     const abortController = new AbortController();
@@ -59,7 +62,7 @@ function Dashboard(props) {
     <div className="dashboard-container" ref={dashboardRef}>
       <div className="dashboard-side">
         <div className="dashboard-side-user">
-          <h3 className="dashboard-side-user-name">Gracjan Kolodziej</h3>
+          <h3 className="dashboard-side-user-name">{`${props.user.firstName} ${props.user.lastName}`}</h3>
           <img
             src="https://i.pravatar.cc/150"
             className="dashboard-side-user-avatar"
@@ -100,14 +103,14 @@ function Dashboard(props) {
             Running log
           </Link>
           <Link
-            to="/dashboard"
-            className="dashboard-side-nav-item ui massive button"
+            className={`dashboard-side-nav-item dashboard-dropdown ui massive button`}
+            to="/dashboard/settings"
           >
-            Edit profile
+            Settings
           </Link>
 
           <button
-            className="dashboard-side-nav-item ui massive button"
+            className="dashboard-side-nav-item ui massive button sign-out-btn"
             onClick={() => props.signOut()}
           >
             Sign out

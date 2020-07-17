@@ -18,6 +18,18 @@ export default (state = { authError: {} }, action) => {
       console.log("logout ok");
 
       return state;
+    case "CHANGE_PASSWORD_OK":
+      console.log("pw changed");
+
+      return state;
+    case "CHANGE_PASSWORD_FAIL":
+      console.log(action.err);
+      return state;
+    case "CHANGE_USERNAME_OK":
+      return state;
+    case "CHANGE_USERNAME_FAIL":
+      console.log(action.err);
+      return state;
 
     default:
       return state;
