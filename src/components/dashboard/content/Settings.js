@@ -1,42 +1,61 @@
 import React, { useState } from "react";
 import { Menu, Segment } from "semantic-ui-react";
-import { changePassword, changeName } from "../../../actions/authActions";
+import {
+  changePassword,
+  changeName,
+  changeEmail,
+} from "../../../actions/authActions";
 import { getUserName } from "../../../actions/userActions";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 function Settings(props) {
   const [activeItem, setActiveItem] = useState("userInfo");
   const renderUserInfoSettings = () => {
-    const onSubmit = (formValues) => {
+    const onSubmitName = (formValues) => {
       const { firstName, lastName } = formValues;
 
       props.changeName(firstName, lastName);
 
       getUserName(props.auth.uid);
     };
+    const onSubmitEmail = (formValues) => {
+      const { email } = formValues;
+      props.changeEmail(email);
+    };
     return (
-      <Form
-        onSubmit={onSubmit}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <Field
-              initialValue={props.user.firstName}
-              name="firstName"
-              component="input"
-              placeholder="First name"
-            />
+      <div className="userInfoForms">
+        <Form
+          onSubmit={onSubmitName}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field
+                initialValue={props.user.firstName}
+                name="firstName"
+                component="input"
+                placeholder="First name"
+              />
 
-            <Field
-              initialValue={props.user.lastName}
-              name="lastName"
-              component="input"
-              placeholder="Last name"
-            />
+              <Field
+                initialValue={props.user.lastName}
+                name="lastName"
+                component="input"
+                placeholder="Last name"
+              />
 
-            <button type="submit">Submit</button>
-          </form>
-        )}
-      />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        />
+        <Form
+          onSubmit={onSubmitEmail}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field name="email" component="input" placeholder="New Email" />
+              <button type="submit">Submit</button>
+            </form>
+          )}
+        />
+      </div>
     );
   };
   const renderPasswordSettings = () => {
@@ -111,5 +130,6 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   changePassword,
   changeName,
+  changeEmail,
   getUserName,
 })(Settings);

@@ -30,6 +30,11 @@ export default (state = { authError: {} }, action) => {
     case "CHANGE_USERNAME_FAIL":
       console.log(action.err);
       return state;
+    case "CHANGE_EMAIL_OK":
+      return state;
+    case "CHANGE_EMAIL_FAIL":
+      console.log(action.err);
+      return state;
 
     default:
       return state;

@@ -136,3 +136,22 @@ export const changeName = (firstName, lastName) => {
       });
   };
 };
+
+export const changeEmail = (email) => {
+  const user = firebase.auth().currentUser;
+  return (dispatch) => {
+    user
+      .updateEmail(email)
+      .then(() => {
+        dispatch({
+          type: "CHANGE_EMAIL_OK",
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "CHANGE_EMAIL_FAIL",
+          err,
+        });
+      });
+  };
+};
