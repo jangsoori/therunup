@@ -196,12 +196,6 @@ export default function RunForm(props) {
             <button class="ui massive button" type="submit">
               Submit
             </button>
-            <button
-              className="ui massive button"
-              onClick={() => history.goBack()}
-            >
-              Go back
-            </button>
           </form>
         );
       }}
