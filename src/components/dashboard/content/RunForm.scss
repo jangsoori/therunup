@@ -1,9 +1,10 @@
 @import "../../../assets/styles/shadows.scss";
 
 .run-form {
-  width: 50rem;
+  width: 80%;
   background-color: white;
   padding: 2rem;
+
   border-radius: 0.5rem;
 
   box-shadow: $shadow-light;
@@ -13,7 +14,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   // gap: 5rem;
-  justify-content: center;
+
   text-align: center;
   align-items: center;
 }
@@ -22,7 +23,7 @@
   display: grid;
   grid-template-rows: 1fr 0.5fr;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   &.single {
     display: block;
   }

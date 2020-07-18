@@ -17,8 +17,11 @@ import "./Dashboard.scss";
 
 //Utilities
 import moment from "moment";
+import useWindowDimensions from "../../assets/hooks/useWindowDimensions";
 //Main Component
 function Dashboard(props) {
+  const { height, width } = useWindowDimensions();
+
   //Dashboard ref for run item menu
   const dashboardRef = useRef(null);
   //Menu state
@@ -58,12 +61,26 @@ function Dashboard(props) {
     return displayTotalDuration(total);
   };
 
+  const determineButtonSize = () => {
+    return height < 600 ? "huge" : "massive";
+  };
   return (
-    <div className="dashboard-container" ref={dashboardRef}>
-      <i class="bars icon menu-open big" onClick={() => setMenuVis(true)}></i>
+    <div
+      className="dashboard-container"
+      ref={dashboardRef}
+      onClick={() => setMenuVis(false)}
+    >
+      <i
+        class="bars icon menu-open big"
+        onClick={(e) => {
+          e.stopPropagation();
+          setMenuVis(true);
+        }}
+      ></i>
 
       <div
         className={`dashboard-side ${menuVis ? "dashboard-side-visible" : ""}`}
+        onClick={(e) => e.stopPropagation()}
       >
         <i
           className="close icon big menu-close"
@@ -93,32 +110,36 @@ function Dashboard(props) {
         </div>
         <div className="dashboard-side-nav">
           <Link
+            onClick={() => setMenuVis(false)}
             to="/dashboard"
-            className="dashboard-side-nav-item ui massive button"
+            className={`dashboard-side-nav-item ui ${determineButtonSize()} button`}
           >
             Dashboard
           </Link>
           <Link
+            onClick={() => setMenuVis(false)}
             to="/dashboard/new"
-            className="dashboard-side-nav-item ui massive button"
+            className={`dashboard-side-nav-item ui ${determineButtonSize()} button`}
           >
             New run
           </Link>
           <Link
+            onClick={() => setMenuVis(false)}
             to="/dashboard/runninglog"
-            className="dashboard-side-nav-item ui massive button"
+            className={`dashboard-side-nav-item ui ${determineButtonSize()} button`}
           >
             Running log
           </Link>
           <Link
-            className={`dashboard-side-nav-item dashboard-dropdown ui massive button`}
+            onClick={() => setMenuVis(false)}
+            className={`dashboard-side-nav-item dashboard-dropdown ui ${determineButtonSize()} button`}
             to="/dashboard/settings"
           >
             Settings
           </Link>
 
           <button
-            className="dashboard-side-nav-item ui massive button red sign-out-btn"
+            className={`dashboard-side-nav-item ui ${determineButtonSize()} button red sign-out-btn`}
             onClick={() => props.signOut()}
           >
             Sign out
