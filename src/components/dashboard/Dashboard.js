@@ -21,8 +21,8 @@ import moment from "moment";
 function Dashboard(props) {
   //Dashboard ref for run item menu
   const dashboardRef = useRef(null);
-  //Dropdown state
-
+  //Menu state
+  const [menuVis, setMenuVis] = useState(false);
   //Fetch user name on page load
   useEffect(() => {
     const abortController = new AbortController();
@@ -60,7 +60,15 @@ function Dashboard(props) {
 
   return (
     <div className="dashboard-container" ref={dashboardRef}>
-      <div className="dashboard-side">
+      <i class="bars icon menu-open big" onClick={() => setMenuVis(true)}></i>
+
+      <div
+        className={`dashboard-side ${menuVis ? "dashboard-side-visible" : ""}`}
+      >
+        <i
+          className="close icon big menu-close"
+          onClick={() => setMenuVis(false)}
+        ></i>
         <div className="dashboard-side-user">
           <h3 className="dashboard-side-user-name">{`${props.user.firstName} ${props.user.lastName}`}</h3>
           <img
@@ -110,7 +118,7 @@ function Dashboard(props) {
           </Link>
 
           <button
-            className="dashboard-side-nav-item ui massive button sign-out-btn"
+            className="dashboard-side-nav-item ui massive button red sign-out-btn"
             onClick={() => props.signOut()}
           >
             Sign out

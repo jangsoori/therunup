@@ -1,17 +1,17 @@
-.log-item-wrapper {
-  &:hover {
-    background-color: #f4f4f4;
-  }
-}
+// .log-item-wrapper {
+//   &:hover {
+//     background-color: #f4f4f4;
+//   }
+// }
 
-.log-item-content {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  //   gap: 3rem;
-  padding: 1rem 0;
+// .log-item-content {
+//   display: grid;
+//   grid-template-columns: repeat(7, 1fr);
+//   //   gap: 3rem;
+//   padding: 1rem 0;
 
-  &-item {
-    justify-self: center;
-    align-self: center;
-  }
-}
+//   &-item {
+//     justify-self: center;
+//     align-self: center;
+//   }
+// }

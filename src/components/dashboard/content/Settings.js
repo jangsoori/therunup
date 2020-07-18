@@ -8,6 +8,25 @@ import {
 import { getUserName } from "../../../actions/userActions";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
+
+const onFail = (msg) => {
+  return (
+    <div class="ui error message">
+      <div class="header">Error</div>
+      <p>{msg}</p>
+    </div>
+  );
+};
+
+const onSuccess = (msg) => {
+  return (
+    <div class="ui success message">
+      <div class="header">Success</div>
+      <p>{msg}</p>
+    </div>
+  );
+};
+
 function Settings(props) {
   const [activeItem, setActiveItem] = useState("userInfo");
   const renderUserInfoSettings = () => {
@@ -27,7 +46,16 @@ function Settings(props) {
         <Form
           onSubmit={onSubmitName}
           render={({ handleSubmit }) => (
-            <form className="ui massive form" onSubmit={handleSubmit}>
+            <form
+              className="ui massive form error success"
+              onSubmit={handleSubmit}
+            >
+              {/* Check if form was submitted successfuly and render message */}
+              {props.err.usernameChange
+                ? props.err.usernameChange.type === "success"
+                  ? onSuccess("Username changed")
+                  : onFail("Please try again")
+                : null}
               <div className="field">
                 <label htmlFor="">First name</label>
                 <Field
@@ -57,7 +85,16 @@ function Settings(props) {
         <Form
           onSubmit={onSubmitEmail}
           render={({ handleSubmit }) => (
-            <form className="ui massive form" onSubmit={handleSubmit}>
+            <form
+              className="ui massive form success error"
+              onSubmit={handleSubmit}
+            >
+              {/* Check if form was submitted successfuly and render message */}
+              {props.err.emailChange
+                ? props.err.emailChange.type === "success"
+                  ? onSuccess("Email changed")
+                  : onFail("Please try again")
+                : null}
               <div className="field">
                 <label htmlFor="">Email</label>
                 <Field
@@ -85,11 +122,21 @@ function Settings(props) {
         props.changePassword(oldPassword, newPassword);
       }
     };
+
     return (
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit }) => (
-          <form className="ui form massive" onSubmit={handleSubmit}>
+          <form
+            className="ui form massive error success"
+            onSubmit={handleSubmit}
+          >
+            {props.err.passwordChange
+              ? props.err.passwordChange.type === "success"
+                ? onSuccess("Password changed")
+                : onFail(props.err.passwordChange.message)
+              : null}
+
             <div className="field">
               <label htmlFor="">Old password</label>
               <Field
@@ -157,6 +204,7 @@ function Settings(props) {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    err: state.auth,
     auth: state.firebase.auth,
   };
 };

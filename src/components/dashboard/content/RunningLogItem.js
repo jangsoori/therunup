@@ -22,40 +22,48 @@ function RunningLogItem(props) {
     return moment.utc(duration * 1000).format("HH:mm:ss");
   };
   return (
-    <div className="log-item-wrapper">
-      <div className="log-item-content">
-        <p className="log-item-content-item">{date}</p>
-        <p className="log-item-content-item">{name}</p>
-        <p className="log-item-content-item">
-          {description ? description : "No description"}
-        </p>
-        <p className="log-item-content-item">
-          {(totalDistanceMeters / 1000).toFixed(2)} km
-        </p>
-        <p className="log-item-content-item">
-          {displayDuration(totalDurationSeconds)}
-        </p>
-        <p className="log-item-content-item">
-          {avgPaceTime.minutes}:
-          {avgPaceTime.seconds < 10
-            ? `0${avgPaceTime.seconds}`
-            : avgPaceTime.seconds}{" "}
-          min/km
-        </p>
-        <div className="log-item-content-item">
-          <Link
-            to={{ pathname: `/dashboard/delete/${id}` }}
-            ref={deleteRef}
-            className="ui button big red"
-          >
-            Delete
-          </Link>
-          <Link to={`/dashboard/edit/${id}`} className="ui button big primary">
-            Edit
-          </Link>
-        </div>
-      </div>
-    </div>
+    <tr>
+      <td className="log-item-content-item">{date}</td>
+      <td className="log-item-content-item">{name}</td>
+      <td className="log-item-content-item">
+        {description ? description : "No description"}
+      </td>
+      <td className="log-item-content-item">
+        {(totalDistanceMeters / 1000).toFixed(2)} km
+      </td>
+      <td className="log-item-content-item">
+        {displayDuration(totalDurationSeconds)}
+      </td>
+      <td className="log-item-content-item">
+        {avgPaceTime.minutes}:
+        {avgPaceTime.seconds < 10
+          ? `0${avgPaceTime.seconds}`
+          : avgPaceTime.seconds}{" "}
+        min/km
+      </td>
+      <td className="log-item-content-item">
+        <tr>
+          <td>
+            <Link
+              to={{ pathname: `/dashboard/delete/${id}` }}
+              ref={deleteRef}
+              className="ui button big red"
+            >
+              Delete
+            </Link>
+          </td>
+          <td>
+            {" "}
+            <Link
+              to={`/dashboard/edit/${id}`}
+              className="ui button big primary"
+            >
+              Edit
+            </Link>
+          </td>
+        </tr>
+      </td>
+    </tr>
   );
 }
 

@@ -9,16 +9,20 @@ export default function RunningLogList(props) {
   };
   return (
     <div className="log-list-wrapper">
-      <div className="log-list-header">
-        <p className="log-list-header-item">Date</p>
-        <p className="log-list-header-item">Title</p>
-        <p className="log-list-header-item">Description</p>
-        <p className="log-list-header-item">Distance</p>
-        <p className="log-list-header-item">Time</p>
-        <p className="log-list-header-item">Average pace</p>
-        <p className="log-list-header-item">Actions</p>
-      </div>
-      {renderRuns(props.runs)}
+      <table className="ui celled table striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Pace</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>{renderRuns(props.runs)}</tbody>{" "}
+      </table>
     </div>
   );
 }

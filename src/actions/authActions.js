@@ -62,6 +62,14 @@ export const signOut = () => {
 };
 
 export const changePassword = (oldPassword, newPassword) => {
+  if (newPassword.length <= 6) {
+    return (dispatch) => {
+      dispatch({
+        type: "CHANGE_PASSWORD_FAIL",
+        err: { message: "Password too short!" },
+      });
+    };
+  }
   const user = firebase.auth().currentUser;
 
   const reauthenticate = (currentPassword) => {
@@ -76,9 +84,10 @@ export const changePassword = (oldPassword, newPassword) => {
       .then(() => {
         user.updatePassword(newPassword);
       })
-      .then(() => {
+      .then((res) => {
         dispatch({
           type: "CHANGE_PASSWORD_OK",
+          res,
         });
       })
       .catch((err) => {

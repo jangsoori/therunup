@@ -1,4 +1,12 @@
-export default (state = { authError: {} }, action) => {
+export default (
+  state = {
+    authError: {},
+    // passwordChange: {},
+    // usernameChange: {},
+    // emailChange: {},
+  },
+  action
+) => {
   switch (action.type) {
     case "SIGNUP_OK":
       console.log("sign up ok");
@@ -19,22 +27,20 @@ export default (state = { authError: {} }, action) => {
 
       return state;
     case "CHANGE_PASSWORD_OK":
-      console.log("pw changed");
+      return { ...state, passwordChange: { type: "success" } };
 
-      return state;
     case "CHANGE_PASSWORD_FAIL":
       console.log(action.err);
-      return state;
+      return { ...state, passwordChange: { ...action.err, type: "fail" } };
     case "CHANGE_USERNAME_OK":
-      return state;
+      return { ...state, usernameChange: { type: "success" } };
     case "CHANGE_USERNAME_FAIL":
-      console.log(action.err);
-      return state;
+      return { ...state, usernameChange: { ...action.err, type: "fail" } };
     case "CHANGE_EMAIL_OK":
-      return state;
+      return { ...state, emailChange: { type: "success" } };
     case "CHANGE_EMAIL_FAIL":
       console.log(action.err);
-      return state;
+      return { ...state, emailChange: action.err };
 
     default:
       return state;
