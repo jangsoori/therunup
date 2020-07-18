@@ -18,7 +18,11 @@ function EditRun(props) {
   } = props.run;
 
   const onSubmit = (values) => {
-    props.editRun(props.match.params.id, { ...values });
+    props.editRun(props.match.params.id, {
+      ...values,
+      avgPace:
+        values.totalDurationSeconds / 60 / (values.totalDistanceMeters / 1000),
+    });
   };
 
   return (

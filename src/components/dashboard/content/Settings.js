@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { Menu, Segment } from "semantic-ui-react";
-import {
-  changePassword,
-  changeName,
-  changeEmail,
-} from "../../../actions/authActions";
-import { getUserName } from "../../../actions/userActions";
+import { changePassword, changeEmail } from "../../../actions/authActions";
+import { getUserName, changeName } from "../../../actions/userActions";
 import { connect } from "react-redux";
 import { Form, Field } from "react-final-form";
 
+//Submit validation function
 const onFail = (msg) => {
   return (
     <div class="ui error message">
@@ -29,19 +26,28 @@ const onSuccess = (msg) => {
 
 function Settings(props) {
   const [activeItem, setActiveItem] = useState("userInfo");
+
+  //Render view functions
+  ////////////////////////////////////////////
+  ///Change user's first name and last name///
   const renderUserInfoSettings = () => {
+    ////////////////////////////////////////
+    ///Submit functions (react final form)///
     const onSubmitName = (formValues) => {
       const { firstName, lastName } = formValues;
-
+      //call action to change name
       props.changeName(firstName, lastName);
-
+      //get updated name
       getUserName(props.auth.uid);
     };
     const onSubmitEmail = (formValues) => {
       const { email } = formValues;
       props.changeEmail(email);
     };
+    /////////////////////////////////////////
+    //////////////Render forms//////////////
     return (
+      //User's display name form
       <div className="userInfoForms" style={{ display: "grid", gap: "2rem" }}>
         <Form
           onSubmit={onSubmitName}
@@ -82,6 +88,7 @@ function Settings(props) {
           )}
         />
 
+        {/* User's email */}
         <Form
           onSubmit={onSubmitEmail}
           render={({ handleSubmit }) => (
@@ -114,6 +121,8 @@ function Settings(props) {
       </div>
     );
   };
+  ///////////////////////////////////////
+  ///////////Render password settings////
   const renderPasswordSettings = () => {
     const onSubmit = (formValues) => {
       const { oldPassword, newPassword, newPasswordRepeat } = formValues;
@@ -123,6 +132,7 @@ function Settings(props) {
       }
     };
 
+    //Render form
     return (
       <Form
         onSubmit={onSubmit}
@@ -173,6 +183,7 @@ function Settings(props) {
     );
   };
 
+  //Render menu with forms
   const handleItemClick = (e, { name }) => setActiveItem(name);
   return (
     <div className="dashboard-content-settings">

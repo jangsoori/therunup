@@ -2,12 +2,14 @@ import React from "react";
 import RunningLogItem from "./RunningLogItem";
 import "./RunningLogList.scss";
 export default function RunningLogList(props) {
+  //Render run list function
   const renderRuns = (runs) => {
     return runs.map((run) => {
       return <RunningLogItem run={run} />;
     });
   };
   return (
+    //Render table
     <div className="log-list-wrapper">
       <table className="ui celled table striped">
         <thead>
