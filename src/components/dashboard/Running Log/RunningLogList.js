@@ -8,7 +8,7 @@ export default function RunningLogList(props) {
   //Render run list function
   const renderRuns = (runs) => {
     return runs.map((run) => {
-      return <RunningLogItem run={run} />;
+      return <RunningLogItem key={run.id} run={run} />;
     });
   };
   return (
@@ -26,7 +26,7 @@ export default function RunningLogList(props) {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>{renderRuns(props.runs)}</tbody>{" "}
+        <tbody>{renderRuns(props.runs)}</tbody>
       </table>
     </div>
   );

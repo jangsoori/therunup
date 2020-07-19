@@ -1,7 +1,7 @@
 //React imports
 import React from "react";
 //React router imports
-import { Link, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 //Components imports
 import Runs from "../RunManagement/Runs";
 import AddRun from "../RunManagement/AddRun";

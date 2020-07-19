@@ -20,7 +20,7 @@ import moment from "moment";
 import useWindowDimensions from "../../../assets/hooks/useWindowDimensions";
 //Main Component
 function Dashboard(props) {
-  const { height, width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
 
   //Dashboard ref for run item menu
   const dashboardRef = useRef(null);
@@ -28,14 +28,9 @@ function Dashboard(props) {
   const [menuVis, setMenuVis] = useState(false);
   //Fetch user name on page load
   useEffect(() => {
-    const abortController = new AbortController();
     if (props.userId) {
       props.getUserName(props.userId);
     }
-
-    return function cleanup() {
-      abortController.abort();
-    };
   }, [props.userId]);
 
   if (!props.runs) {
@@ -79,7 +74,7 @@ function Dashboard(props) {
       onClick={() => setMenuVis(false)}
     >
       <i
-        class="bars icon menu-open big"
+        className="bars icon menu-open big"
         onClick={(e) => {
           e.stopPropagation();
           setMenuVis(true);
@@ -106,7 +101,7 @@ function Dashboard(props) {
         <div className="dashboard-side-stats">
           <div className="dashboard-side-stats-item">
             <p>Runs:</p>
-            <span>{props.runs.length}</span>
+            <span>{totalRuns}</span>
           </div>
           <div className="dashboard-side-stats-item">
             <p>Distance:</p>

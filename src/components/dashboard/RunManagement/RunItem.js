@@ -1,9 +1,16 @@
-import React, { useState, useRef, createRef } from "react";
+import React, { useState, useRef } from "react";
+
+//Actions
 import { deleteRun } from "../../../actions/runActions";
+//Redux
 import { connect } from "react-redux";
-import moment from "moment";
-import "./RunItem.scss";
+//Router
 import { Link } from "react-router-dom";
+//Styles
+import "./RunItem.scss";
+//Utils
+import moment from "moment";
+
 const displayDuration = (duration) => {
   return moment.utc(duration * 1000).format("HH:mm:ss");
 };

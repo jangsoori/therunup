@@ -199,7 +199,7 @@ export default function RunForm(props) {
               </div>
             </div>
 
-            <button class="ui massive button" type="submit">
+            <button className="ui massive button" type="submit">
               Submit
             </button>
           </form>

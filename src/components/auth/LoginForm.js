@@ -13,7 +13,17 @@ function LoginScreen(props) {
 
   return (
     <div className="auth-form-wrapper">
+      <div className="testing">
+        <p>For testing purposes:</p>
+        <p>
+          <strong>Email</strong>: test@test.test
+        </p>
+        <p>
+          <strong>Password</strong>: test123
+        </p>
+      </div>
       <h2 className="form-title">Log in</h2>
+
       <Form
         onSubmit={(e) => {
           props.logIn(email.value, password.value);

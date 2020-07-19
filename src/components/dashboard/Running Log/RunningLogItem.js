@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import moment from "moment";
 import "./RunningLogItem.scss";
 import { deleteRun, editRun } from "../../../actions/runActions";
@@ -43,30 +43,33 @@ function RunningLogItem(props) {
         {avgPaceTime(avgPace).minutes}:
         {avgPaceTime(avgPace).seconds < 10
           ? `0${avgPaceTime(avgPace).seconds}`
-          : avgPaceTime(avgPace).seconds}{" "}
+          : avgPaceTime(avgPace).seconds}
         min/km
       </td>
       <td className="log-item-content-item">
-        <tr>
-          <td>
-            <Link
-              to={{ pathname: `/dashboard/delete/${id}` }}
-              ref={deleteRef}
-              className="ui button big red"
-            >
-              Delete
-            </Link>
-          </td>
-          <td>
-            {" "}
-            <Link
-              to={`/dashboard/edit/${id}`}
-              className="ui button big primary"
-            >
-              Edit
-            </Link>
-          </td>
-        </tr>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <Link
+                  to={{ pathname: `/dashboard/delete/${id}` }}
+                  ref={deleteRef}
+                  className="ui button big red"
+                >
+                  Delete
+                </Link>
+              </td>
+              <td>
+                <Link
+                  to={`/dashboard/edit/${id}`}
+                  className="ui button big primary"
+                >
+                  Edit
+                </Link>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </td>
     </tr>
   );

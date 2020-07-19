@@ -37,6 +37,9 @@ export const deleteRun = (runId) => {
       .delete()
       .then(() => {
         dispatch({ type: "DELETE_RUN" });
+      })
+      .catch((err) => {
+        console.log(err);
       });
     history.goBack();
   };

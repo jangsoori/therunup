@@ -1,5 +1,4 @@
 import firebase from "firebase/app";
-import history from "../history";
 
 export const getUserName = (id) => {
   return (dispatch, getState, getFirebase) => {
@@ -9,8 +8,6 @@ export const getUserName = (id) => {
       .doc(id)
       .get()
       .then((res) => {
-        console.log(res.data());
-
         dispatch({ type: "GET_USER_NAME_OK", payload: res.data() });
       })
       .catch((err) => {
@@ -24,7 +21,6 @@ export const getUserName = (id) => {
 export const getUserRuns = () => {
   return (dispatch, getState, getFirebase) => {
     const user = firebase.auth().currentUser;
-    console.log(user.uid);
 
     getFirebase()
       .firestore()
