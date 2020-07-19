@@ -5,6 +5,7 @@ import { deleteRun, editRun } from "../../../actions/runActions";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+//Calculate functions
 const avgPaceTime = (avgPace) => moment.duration(avgPace, "minutes")._data;
 const displayDuration = (duration) => {
   return moment.utc(duration * 1000).format("HH:mm:ss");
@@ -23,8 +24,7 @@ function RunningLogItem(props) {
     totalDurationSeconds,
     id,
   } = props.run;
-  console.log(avgPaceTime(avgPace));
-  console.log(1200 / 60 / (5000 / 1000));
+
   return (
     <tr>
       <td className="log-item-content-item">{date}</td>
@@ -39,6 +39,7 @@ function RunningLogItem(props) {
         {displayDuration(totalDurationSeconds)}
       </td>
       <td className="log-item-content-item">
+        {/* Time formating */}
         {avgPaceTime(avgPace).minutes}:
         {avgPaceTime(avgPace).seconds < 10
           ? `0${avgPaceTime(avgPace).seconds}`

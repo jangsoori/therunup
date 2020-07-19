@@ -62,7 +62,15 @@ function Dashboard(props) {
   };
 
   const determineButtonSize = () => {
-    return height < 600 ? "huge" : "massive";
+    if (height > 600) {
+      return "massive";
+    } else if (height <= 600 && height > 500) {
+      return "huge";
+    } else if (height <= 500 && height > 450) {
+      return "big";
+    } else if (height <= 450) {
+      return "small";
+    }
   };
   return (
     <div

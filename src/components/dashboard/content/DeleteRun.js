@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+
+//Actions
 import { deleteRun } from "../../../actions/runActions";
-import history from "../../../history";
+
+//Redux
+import { connect } from "react-redux";
+
+//Styles
 import { Modal } from "semantic-ui-react";
 
+//Utilities
+import history from "../../../history";
+/////////////////////////////////////
+//MAIN
 function DeleteRun(props) {
-  console.log(props);
-
+  //State management for opening modal.
   const [open, setOpen] = useState(true);
-
+  //Close modal
   const handleClose = () => {
     setOpen(false);
     history.goBack();
@@ -16,22 +24,6 @@ function DeleteRun(props) {
 
   return (
     <Modal open={open} onClose={() => handleClose()}>
-      {/* <Header icon="archive" content="Delete run" />
-      <Modal.Content>
-        <p>Are you sure you want to delete this run?</p>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button
-          color="red"
-          onClick={() => props.deleteRun(props.match.params.id)}
-        >
-          Yes
-        </Button>
-        <Button color="green" onClick={() => history.push("/")}>
-          No
-        </Button>
-      </Modal.Actions> */}
-
       <div className="header">
         <h1>Delete run</h1>
       </div>

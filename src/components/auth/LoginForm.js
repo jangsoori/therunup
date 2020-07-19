@@ -16,7 +16,6 @@ function LoginScreen(props) {
       <h2 className="form-title">Log in</h2>
       <Form
         onSubmit={(e) => {
-          console.log(email.value, password.value);
           props.logIn(email.value, password.value);
         }}
         render={({ handleSubmit }) => (

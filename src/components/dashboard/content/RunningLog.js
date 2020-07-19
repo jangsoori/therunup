@@ -1,9 +1,16 @@
 import React from "react";
-import moment from "moment";
+
+//Redux
 import { connect } from "react-redux";
+//Components
 import RunningLogList from "./RunningLogList";
+//Utils
+import moment from "moment";
+
+//Main
 function RunningLog(props) {
-  var runs = props.runs.slice();
+  //Sort runs (TODO: make that reusable function)
+  let runs = props.runs.slice();
   let sortedRuns = runs.sort((a, b) => {
     return moment(a.date) < moment(b.date);
   });

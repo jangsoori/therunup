@@ -1,6 +1,9 @@
 import React from "react";
+//Componetns
 import RunningLogItem from "./RunningLogItem";
+//Styles
 import "./RunningLogList.scss";
+//Main
 export default function RunningLogList(props) {
   //Render run list function
   const renderRuns = (runs) => {

@@ -1,8 +1,16 @@
 import React from "react";
+
+//Components
 import RunForm from "./RunForm";
+//Actions
 import { addRun } from "../../../actions/runActions";
+//Redux
 import { connect } from "react-redux";
+//Utilities
 import moment from "moment";
+
+////////////////////////////////////////////
+//MAIN///
 function AddRun(props) {
   const onSubmit = (values) => {
     props.addRun({

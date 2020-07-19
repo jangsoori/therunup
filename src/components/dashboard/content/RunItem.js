@@ -9,10 +9,12 @@ const displayDuration = (duration) => {
 };
 
 function RunItem(props) {
+  //Handle pop out menu state
   const [itemMenuVis, setItemMenuVis] = useState(false);
+  //Get ref for delete button to use it in modal in Delete Run component
   const deleteRef = useRef(null);
 
-  //Close menu on click outside of menu
+  //Close menu on click outside of menu (get ref for dashboard)
   if (props.dbRef.current) {
     props.dbRef.current.onclick = (e) => {
       if (
@@ -22,7 +24,7 @@ function RunItem(props) {
         setItemMenuVis(false);
     };
   }
-
+  //Get values from run state
   const {
     avgPace,
     description,
@@ -32,6 +34,7 @@ function RunItem(props) {
     date,
     id,
   } = props.run;
+  //Convert decimal avgPace to time
   const avgPaceTime = moment.duration(avgPace, "minutes")._data;
   return (
     <div className="run-item-wrapper">
@@ -46,7 +49,6 @@ function RunItem(props) {
             <div className={`run-item-menu`}>
               <i
                 onClick={(e) => {
-                  // e.stopPropagation();
                   setItemMenuVis(!itemMenuVis);
                 }}
                 className="fas fa-ellipsis-h run-item-menu-icon"
@@ -73,22 +75,26 @@ function RunItem(props) {
           <img src="https://via.placeholder.com/600x200" alt="" />
         </div>
         <div className="run-item-detail">
-          <p>
-            Distance: <span>{(totalDistanceMeters / 1000).toFixed(2)} km</span>
-          </p>
-          <p>
-            Pace:{" "}
+          <div className="run-item-detail-text">
+            <p>Distance </p>
+            <span>{(totalDistanceMeters / 1000).toFixed(2)} km</span>
+          </div>
+          <div className="run-item-detail-text">
+            <p>Pace</p>
+
             <span>
+              {/* Time formating */}
               {avgPaceTime.minutes}:
               {avgPaceTime.seconds < 10
                 ? `0${avgPaceTime.seconds}`
                 : avgPaceTime.seconds}{" "}
               min/km
             </span>
-          </p>
-          <p>
-            Time: <span>{displayDuration(totalDurationSeconds)}</span>
-          </p>
+          </div>
+          <div className="run-item-detail-text">
+            <p>Time</p>
+            <span>{displayDuration(totalDurationSeconds)}</span>
+          </div>
         </div>
       </div>
     </div>

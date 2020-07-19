@@ -1,12 +1,22 @@
 import React from "react";
+
+//Components
 import RunForm from "./RunForm";
+//Actions
 import { editRun } from "../../../actions/runActions";
+//Redux
 import { connect } from "react-redux";
+
+//////////////////////////////////////////
+//Main
+
 function EditRun(props) {
   const { run } = props;
+  //Wait for runs to load
   if (!run) {
     return <div>loading...</div>;
   }
+  //Get property values from single run
   const {
     name,
     description,
@@ -17,6 +27,7 @@ function EditRun(props) {
     distanceM,
   } = props.run;
 
+  //Handle submit case
   const onSubmit = (values) => {
     props.editRun(props.match.params.id, {
       ...values,
@@ -29,6 +40,7 @@ function EditRun(props) {
     <div className="dashboard-content-edit-run">
       <h1 className="dashboard-content-title">Edit run</h1>
       <RunForm
+        //Set initial values on the form
         initialValues={{
           name: name,
           description: description,

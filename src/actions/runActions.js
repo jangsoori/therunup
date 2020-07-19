@@ -1,4 +1,3 @@
-import firebase from "firebase/app";
 import history from "../history";
 
 export const addRun = (run) => {
@@ -26,7 +25,7 @@ export const editRun = (runId, values) => {
       .then(() => {
         dispatch({ type: "EDIT_RUN" });
       });
-    history.push("/dashboard");
+    history.goBack();
   };
 };
 export const deleteRun = (runId) => {

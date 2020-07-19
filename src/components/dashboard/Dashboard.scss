@@ -197,7 +197,15 @@
   }
 }
 
-@media screen and (max-height: 1000px) {
+@media screen and (max-width: 400) {
+  .run-item-detail {
+    &-text {
+      color: red;
+      font-size: 1rem;
+    }
+  }
+}
+@media screen and (max-height: 800px) {
   .dashboard-side {
     height: 100vh;
     -webkit-backface-visibility: hidden;
@@ -223,6 +231,31 @@
     }
   }
 }
+@media screen and (max-height: 600px) {
+  .dashboard-side {
+    &-nav {
+      gap: 0rem;
+    }
+  }
+}
+@media screen and (max-height: 567px) {
+  .dashboard-side {
+    gap: 0.5rem;
+    &-stats-item {
+      align-items: center;
+      font-size: 1rem;
+      span {
+        font-size: 1rem;
+      }
+    }
+    &-nav {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, max-content);
+      gap: 1rem;
+    }
+  }
+}
+
 .settings-content {
   width: 80%;
 }

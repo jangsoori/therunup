@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+//This hook is used to determine semantic ui button sizes depending on height/width of the screen
+
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {

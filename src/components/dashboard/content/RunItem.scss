@@ -91,12 +91,17 @@
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-around;
     padding-bottom: 2rem;
-    > p {
-      font-size: 1.6rem;
+
+    > div {
       justify-self: center;
-      font-weight: bold;
+
+      p {
+        font-weight: bold;
+        font-size: 1.6rem;
+      }
       > span {
         font-weight: normal;
+        font-size: 1.6rem;
       }
     }
   }

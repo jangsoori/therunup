@@ -1,9 +1,13 @@
 import React from "react";
+
+//React final form
 import { Form, Field } from "react-final-form";
+
+//Styles
 import "./RunForm.scss";
-import history from "../../../history";
-import useWindowDimensions from "../../../assets/hooks/useWindowDimensions";
-//FORM VALIDATION
+
+//////////////////////////////////////////////
+//FORM VALIDATION/////////////////
 
 const required = (value) => (value ? undefined : "Required");
 const mustBeNumber = (value) => (isNaN(value) ? "Must be a number" : undefined);
@@ -15,11 +19,11 @@ const maxValue = (max) => (value) =>
     : `Should be smaller than ${max + 1}`;
 const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
-
+///////////////////////////////////////////////
 export default function RunForm(props) {
-  const { height, width } = useWindowDimensions();
-
+  //Handle submit
   const onSubmit = (formValues) => {
+    //get values from form first
     const {
       durationSeconds,
       durationH,
@@ -29,6 +33,7 @@ export default function RunForm(props) {
       name,
       description,
     } = formValues;
+    //submit with action
     props.onSubmit({
       name,
       description,
@@ -46,6 +51,7 @@ export default function RunForm(props) {
 
   return (
     <Form
+      //set initial values if there are any
       initialValues={props.initialValues}
       onSubmit={onSubmit}
       render={({ handleSubmit }) => {
