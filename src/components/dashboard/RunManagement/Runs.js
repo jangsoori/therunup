@@ -1,6 +1,6 @@
 import React from "react";
 import "./Runs.scss";
-import RunList from "./content/RunList";
+import RunList from "./RunList";
 
 export default function Runs(props) {
   return (

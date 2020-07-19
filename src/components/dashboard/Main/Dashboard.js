@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 //Action imports
-import { getUserRuns, getUserName } from "../../actions/userActions";
-import { signOut } from "../../actions/authActions";
+import { getUserRuns, getUserName } from "../../../actions/userActions";
+import { signOut } from "../../../actions/authActions";
 //Components
 import DashboardContent from "./DashboardContent";
 //Style imports
@@ -17,7 +17,7 @@ import "./Dashboard.scss";
 
 //Utilities
 import moment from "moment";
-import useWindowDimensions from "../../assets/hooks/useWindowDimensions";
+import useWindowDimensions from "../../../assets/hooks/useWindowDimensions";
 //Main Component
 function Dashboard(props) {
   const { height, width } = useWindowDimensions();

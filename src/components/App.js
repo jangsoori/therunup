@@ -12,7 +12,7 @@ import "./App.scss";
 
 import LoginForm from "./auth/LoginForm";
 import SignUpForm from "./auth/SignUpForm";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./dashboard/Main/Dashboard";
 
 // const user = firebase.auth().currentUser;
 

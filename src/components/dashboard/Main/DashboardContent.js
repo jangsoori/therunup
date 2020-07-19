@@ -3,14 +3,14 @@ import React from "react";
 //React router imports
 import { Link, Route } from "react-router-dom";
 //Components imports
-import Runs from "./Runs";
-import AddRun from "./content/AddRun";
-import EditRun from "./content/EditRun";
-import DeleteRun from "./content/DeleteRun";
-import Settings from "./content/Settings";
+import Runs from "../RunManagement/Runs";
+import AddRun from "../RunManagement/AddRun";
+import EditRun from "../RunManagement/EditRun";
+import DeleteRun from "../RunManagement/DeleteRun";
+import Settings from "../Settings/Settings";
 //Styles
 import "./DashboardContent.scss";
-import RunningLog from "./content/RunningLog";
+import RunningLog from "../Running Log/RunningLog";
 export default function DashboardContent(props) {
   return (
     <React.Fragment>
