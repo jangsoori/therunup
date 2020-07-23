@@ -20,8 +20,8 @@ Or you can create your own account.
 
 ///////////
 
-Fixes to do:
-Handle errors on forms better.
-Make UI adjusments.
-Add run with specific time.
-Possibility to add profile pic
+Fixes to do:  
+Handle errors on forms better.  
+Make UI adjusments.  
+Add run with specific time.  
+Possibility to add profile pic. 
