@@ -1,11 +1,15 @@
 CRUD application that allows to manage runs.
+  
+Live: https://therunup-e8116.web.app/login.
 
-Live: https://therunup-e8116.web.app/login
-/////////
-Stack: React, Firebase with firestore
-/////////
-Styling: SCSS
-/////////
+/////////. 
+
+Stack: React, Firebase with firestore. 
+
+/////////.  
+Styling: SCSS. 
+
+/////////. 
 Authentication by firebase auth.
 
 You can log in using:
